@@ -1,2 +1,15 @@
+.dmp-phrase-bar-container {
 
+    background-color: yellow;
+    height: 3vw;
+    width: 100%;
+}
+
+.dmp-phrase-bar {
+
+    background-color: red;
+    height: 3vw;
+    width: 30%;
+    border-right: 4px solid green;
+}
 

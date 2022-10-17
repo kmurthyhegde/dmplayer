@@ -1,5 +1,5 @@
 const manifestUri =
-    'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
+    'https://bhaart-videos.s3.ap-south-1.amazonaws.com/sriramachandra/dash-sri-ramachandra-sd-st.mpd';
 
 async function init() {
 
@@ -21,12 +21,13 @@ async function init() {
     //set ui configuration options
     const config = {
         controlPanelElements: [
-            // 'time_and_duration',
-            // 'spacer',
-            // 'mute',
-            // 'volume',
-            // 'fullscreen',
-            // 'overflow_menu'
+            'skip',
+             'time_and_duration',
+             'spacer',
+             'mute',
+             'volume',
+             'fullscreen',
+             'overflow_menu'
         ],
         overflowMenuButtons: [
             // 'captions',
@@ -36,7 +37,7 @@ async function init() {
             // 'cast',
             // 'playback_rate'
         ],
-        addSeekBar: false, 
+        addSeekBar: true, 
         addBigPlayButton: true,
         // fadeDelay: 0,
         // doubleClickForFullscreen: true,
@@ -59,17 +60,54 @@ async function init() {
     player.addEventListener('error', onPlayerErrorEvent);
     controls.addEventListener('error', onUIErrorEvent);
    
+    
     // Try to load a manifest.
     // This is an asynchronous process.
     try {
         await player.load(manifestUri);
         // This runs if the asynchronous load is successful.
         console.log('LOG: The video has now been loaded!');
+        onVideoLoad();
     } catch (error) {
         onPlayerError(error);
     }
     
 }
+
+
+function onVideoLoad() {
+    console.log('LOG: onVideoLoad() ');
+
+    //remove unwanted elements, for testing
+    document.getElementsByClassName("shaka-ad-controls shaka-hidden")[0].remove();
+    document.getElementsByClassName("shaka-play-button-container")[0].remove();
+    document.getElementsByClassName("shaka-server-side-ad-container")[0].remove();
+    document.getElementsByClassName("shaka-controls-button-panel")[0].remove();
+    document.getElementsByClassName("shaka-client-side-ad-container")[0].remove();
+    document.getElementsByClassName("shaka-spinner-container")[0].remove();
+    document.getElementsByClassName("shaka-text-container")[0].remove();
+    document.getElementsByClassName("shaka-scrim-container")[0].remove();
+    document.getElementsByClassName("shaka-overflow-menu")[0].remove();
+    document.getElementsByClassName("shaka-seek-bar-container")[0].remove();
+
+    /*
+        ADD PHRASE BAR
+    */
+    let bottom_controls =  document.getElementsByClassName("shaka-bottom-controls")[0];
+
+    //add seek bar container
+    const phraseBarContainer = document.createElement('div');
+    phraseBarContainer.classList.add('dmp-phrase-bar-container');
+    bottom_controls.appendChild(phraseBarContainer);
+
+    //Add phrases
+    const phraseBar = document.createElement('div');
+    phraseBar.classList.add('dmp-phrase-bar');
+    phraseBarContainer.appendChild(phraseBar);
+    
+    
+} 
+
 
 function onPlayerErrorEvent(errorEvent) {
     // Extract the shaka.util.Error object from the event.
