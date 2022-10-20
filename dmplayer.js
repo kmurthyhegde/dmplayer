@@ -1,6 +1,9 @@
 const manifestUri =
     'https://bhaart-videos.s3.ap-south-1.amazonaws.com/sriramachandra/dash-sri-ramachandra-sd-st.mpd';
 
+let curPhraseIndex = 0;
+let currentPhraseBar = null;
+
 async function init() {
 
     //retrieve video element 
@@ -113,34 +116,40 @@ function onVideoLoad() {
     const borderWidth = 0;
     const videoLength = phrases[phrases.length-1].endTime;
 
-    phrases.forEach(phrase => {
+    phrases.forEach((phrase, index) => {
         const phraseBar = document.createElement('div');
         phraseBar.style.width = "" + ((phrase.endTime - phrase.startTime)*100.0)/videoLength + "%";
         phraseBar.classList.add('dmp-phrase-bar');
+        phraseBar.id = index;
+        phraseBar.addEventListener('click', () => {
+            console.log('LOG: phraseBar id: ' + phraseBar.id);
+            if(curPhraseIndex != phraseBar.id) {
+                curPhraseIndex = phraseBar.id;
+                video.currentTime = phrases[curPhraseIndex].startTime;
+                highlightCurrentPhrase();
+            }
+
+        });
         phraseBarContainer.appendChild(phraseBar);
         console.log('endTime: ' + phrase.endTime + ' startTime: ' + phrase.startTime + ' width: ' + phraseBar.style.width);
     });
  
-    let curPhraseIndex = 0;
     
     //Highlight first phrase
-    console.log('LOG: phrase bar count: ' + document.getElementsByClassName("dmp-phrase-bar").length);
-    let currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
-    currentPhraseBar.classList.add('dmp-current-phrase-bar');
+    highlightCurrentPhrase();
+    // currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
+    // currentPhraseBar.classList.add('dmp-current-phrase-bar');
 
     //listen to time updates...
     video.addEventListener('timeupdate', () => {
-        console.log('LOG: timeupdated ' + video.currentTime);
-
         //hightlight the next phrase, if the current one is done. 
         if(video.currentTime > phrases[curPhraseIndex].endTime) {
             curPhraseIndex++;
-            currentPhraseBar.classList.remove('dmp-current-phrase-bar');
-            currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
-            currentPhraseBar.classList.add('dmp-current-phrase-bar');
+            highlightCurrentPhrase();
         }
     });
 } 
+
 
 
 function onPlayerErrorEvent(errorEvent) {
@@ -162,6 +171,14 @@ function initFailed(errorEvent) {
     // Handle the failure to load; errorEvent.detail.reasonCode has a
     // shaka.ui.FailReasonCode describing why.
     console.error('Unable to load the UI library!');
+}
+
+
+function highlightCurrentPhrase() {
+    if(currentPhraseBar != null)
+        currentPhraseBar.classList.remove('dmp-current-phrase-bar');
+    currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
+    currentPhraseBar.classList.add('dmp-current-phrase-bar');
 }
 
 // Listen to the custom shaka-ui-loaded event, to wait until the UI is loaded.
