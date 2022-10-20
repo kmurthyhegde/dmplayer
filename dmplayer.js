@@ -67,16 +67,23 @@ async function init() {
         await player.load(manifestUri);
         // This runs if the asynchronous load is successful.
         console.log('LOG: The video has now been loaded!');
-        onVideoLoad();
     } catch (error) {
         onPlayerError(error);
     }
+
+    await player.addChaptersTrack(
+        'https://bhaart-videos.s3.ap-south-1.amazonaws.com/sriramachandra/SriRamachandraKripalu_chapters.vtt',
+        'en'
+    );
+
+    onVideoLoad();
     
 }
 
 
 function onVideoLoad() {
     console.log('LOG: onVideoLoad() ');
+
 
     //remove unwanted elements, for testing
     document.getElementsByClassName("shaka-ad-controls shaka-hidden")[0].remove();
@@ -95,17 +102,29 @@ function onVideoLoad() {
     */
     let bottom_controls =  document.getElementsByClassName("shaka-bottom-controls")[0];
 
-    //add seek bar container
+    //add phrase bar container
     const phraseBarContainer = document.createElement('div');
     phraseBarContainer.classList.add('dmp-phrase-bar-container');
     bottom_controls.appendChild(phraseBarContainer);
 
     //Add phrases
-    const phraseBar = document.createElement('div');
-    phraseBar.classList.add('dmp-phrase-bar');
-    phraseBarContainer.appendChild(phraseBar);
+    const phrases = player.getChapters('en');
+    const containerWidth = document.getElementById("videoContainer").clientWidth;
+    const borderWidth = 1;
+    const videoLength = phrases[phrases.length-1].endTime;
+
+    phrases.forEach(phrase => {
+        const phraseBar = document.createElement('div');
+        phraseBar.style.width = "" + ((phrase.endTime - phrase.startTime)*containerWidth)/videoLength - borderWidth + "px";
+        phraseBar.classList.add('dmp-phrase-bar');
+        phraseBarContainer.appendChild(phraseBar);
+        console.log('endTime: ' + phrase.endTime + ' startTime: ' + phrase.startTime + ' width: ' + phraseBar.style.width);
+    });
     
-    
+    //Highlight current phrase
+    console.log('LOG: phrase bar count: ' + document.getElementsByClassName("dmp-phrase-bar").length);
+    const currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[10];
+    currentPhraseBar.classList.add('dmp-current-phrase-bar');
 } 
 
 

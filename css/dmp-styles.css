@@ -1,15 +1,43 @@
 .dmp-phrase-bar-container {
 
     background-color: yellow;
-    height: 3vw;
+    height: 2vw;
     width: 100%;
 }
 
 .dmp-phrase-bar {
 
-    background-color: red;
-    height: 3vw;
-    width: 30%;
-    border-right: 4px solid green;
+    /*background-color:  #E4B3D1;*/
+    background: linear-gradient(to right,  #ffc7e8, white);
+    height: 2vw;
+    /*width: 20px;*/
+    border-left: 1px solid #634e91;
+    display:inline-block;
 }
 
+/* don't provide border to first phrase*/
+.dmp-phrase-bar:first-of-type {
+    border-left: 0px;
+  }
+
+/* animation for the current phrase*/
+@keyframes dmp-current-phrase-bar-animation {
+    0% {background: #634e91;}
+    75% {background: #bd89ff;}
+    100% {background: #ffc7e8;}
+  }
+
+/* highlight the current phrase*/
+.dmp-current-phrase-bar {
+    animation-name: dmp-current-phrase-bar-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+
+
+/*
+    9777dd
+*/
