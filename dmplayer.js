@@ -110,12 +110,12 @@ function onVideoLoad() {
     //Add phrases
     const phrases = player.getChapters('en');
     const containerWidth = document.getElementById("videoContainer").clientWidth;
-    const borderWidth = 1;
+    const borderWidth = 0;
     const videoLength = phrases[phrases.length-1].endTime;
 
     phrases.forEach(phrase => {
         const phraseBar = document.createElement('div');
-        phraseBar.style.width = "" + ((phrase.endTime - phrase.startTime)*containerWidth)/videoLength - borderWidth + "px";
+        phraseBar.style.width = "" + ((phrase.endTime - phrase.startTime)*100.0)/videoLength + "%";
         phraseBar.classList.add('dmp-phrase-bar');
         phraseBarContainer.appendChild(phraseBar);
         console.log('endTime: ' + phrase.endTime + ' startTime: ' + phrase.startTime + ' width: ' + phraseBar.style.width);

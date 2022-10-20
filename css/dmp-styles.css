@@ -11,7 +11,7 @@
     background: linear-gradient(to right,  #ffc7e8, white);
     height: 2vw;
     /*width: 20px;*/
-    border-left: 1px solid #634e91;
+    border-left: 0px solid #634e91;
     display:inline-block;
 }
 
@@ -23,14 +23,14 @@
 /* animation for the current phrase*/
 @keyframes dmp-current-phrase-bar-animation {
     0% {background: #634e91;}
-    75% {background: #bd89ff;}
-    100% {background: #ffc7e8;}
+    100% {background: #bd89ff;}
+    /*100% {background: #ffc7e8;}*/
   }
 
 /* highlight the current phrase*/
 .dmp-current-phrase-bar {
     animation-name: dmp-current-phrase-bar-animation;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-direction: alternate-reverse;
