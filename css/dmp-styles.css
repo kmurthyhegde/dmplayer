@@ -1,7 +1,7 @@
 .dmp-phrase-bar-container {
 
     background-color: yellow;
-    height: 2vw;
+    height: 4vw;
     width: 100%;
 }
 
@@ -9,7 +9,7 @@
 
     /*background-color:  #E4B3D1;*/
     background: linear-gradient(to right,  #ffc7e8, white);
-    height: 2vw;
+    height: 4vw;
     /*width: 20px;*/
     border-left: 0px solid #634e91;
     display:inline-block;
@@ -23,7 +23,7 @@
 /* animation for the current phrase*/
 @keyframes dmp-current-phrase-bar-animation {
     0% {background: #634e91;}
-    100% {background: #bd89ff;}
+    100% {background: #b688ff;}
     /*100% {background: #ffc7e8;}*/
   }
 

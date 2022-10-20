@@ -120,11 +120,26 @@ function onVideoLoad() {
         phraseBarContainer.appendChild(phraseBar);
         console.log('endTime: ' + phrase.endTime + ' startTime: ' + phrase.startTime + ' width: ' + phraseBar.style.width);
     });
+ 
+    let curPhraseIndex = 0;
     
-    //Highlight current phrase
+    //Highlight first phrase
     console.log('LOG: phrase bar count: ' + document.getElementsByClassName("dmp-phrase-bar").length);
-    const currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[10];
+    let currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
     currentPhraseBar.classList.add('dmp-current-phrase-bar');
+
+    //listen to time updates...
+    video.addEventListener('timeupdate', () => {
+        console.log('LOG: timeupdated ' + video.currentTime);
+
+        //hightlight the next phrase, if the current one is done. 
+        if(video.currentTime > phrases[curPhraseIndex].endTime) {
+            curPhraseIndex++;
+            currentPhraseBar.classList.remove('dmp-current-phrase-bar');
+            currentPhraseBar = document.getElementsByClassName("dmp-phrase-bar")[curPhraseIndex];
+            currentPhraseBar.classList.add('dmp-current-phrase-bar');
+        }
+    });
 } 
 
 
