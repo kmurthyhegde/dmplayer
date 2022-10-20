@@ -130,7 +130,7 @@ function onVideoLoad() {
 
 function onPlayerErrorEvent(errorEvent) {
     // Extract the shaka.util.Error object from the event.
-    onPlayerError(event.detail);
+    onPlayerError(errorEvent.detail);
 }
   
 function onPlayerError(error) {
@@ -140,7 +140,7 @@ function onPlayerError(error) {
 
 function onUIErrorEvent(errorEvent) {
     // Extract the shaka.util.Error object from the event.
-    onPlayerError(event.detail);
+    onPlayerError(errorEvent.detail);
 }
 
 function initFailed(errorEvent) {
