@@ -1,0 +1,132 @@
+/* 
+This ensures that the video poster is 
+always the size of the video
+*/
+video {
+    object-fit:cover;
+}
+
+/* forcefully hide the shaka's seek bar */
+.shaka-seek-bar-container {
+    display: none;
+}
+
+/*customize current-time control */ 
+/* .shaka-current-time {
+    display: none;
+} */
+
+/*customize fullscreen control */ 
+.shaka-fullscreen-button {
+    display: none;
+}
+
+/*customize mute control */ 
+.shaka-mute-button {
+    display: none;
+}
+
+/*customize volume bar control */ 
+.shaka-volume-bar-container {
+    display: none;
+}
+
+/*customize volume bar control */ 
+.shaka-overflow-menu-button {
+    display: none;
+}
+
+/* .shaka-controls-container {
+    justify-content: flex-start;
+
+} */
+
+.dmp-phrase-bar-container {
+
+    background-color: yellow;
+    height: 10%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.6, 1) 600ms;
+    z-index: 3;
+    position:absolute;
+
+}
+
+.dmp-phrase-navigation-container {
+    background-color: #634e91 ;
+    height: 10%;
+    width: 30%;
+    opacity: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.6, 1) 600ms;
+    z-index: 2;
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.dmp-phrase-navigation-container > * {
+    color: #ffc7e8;
+    height: 100px;
+    line-height: 0.5;
+    margin: 1px;
+    padding: 0 5px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.shaka-controls-container[shown="true"] .dmp-phrase-bar-container,
+.shaka-controls-container[shown="true"] .dmp-phrase-navigation-container
+ {
+
+    opacity: 1;
+}
+
+
+.dmp-phrase-bar {
+
+    /*background-color:  #E4B3D1;*/
+    background: linear-gradient(to right,  #ffc7e8, white);
+    height: 100%;
+    /*width: 20px;*/
+    border-left: 0px solid #634e91;
+    display:inline-block;
+}
+
+/* don't provide border to first phrase*/
+.dmp-phrase-bar:first-of-type {
+    border-left: 0px;
+  }
+
+/* animation for the current phrase*/
+@keyframes dmp-current-phrase-bar-animation {
+    0% {background: #634e91;}
+    100% {background: #b688ff;}
+    /*100% {background: #ffc7e8;}*/
+  }
+
+/* highlight the current phrase*/
+.dmp-current-phrase-bar {
+    animation-name: dmp-current-phrase-bar-animation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: alternate-reverse;
+}
+
+
+/* customize bottom controls to remove bottom padding and make width 100%*/
+.shaka-bottom-controls {
+    width: 100%;
+    padding: 0;
+    z-index: 1;
+}
+
+
+.shaka-scrim-container {
+    display: none;
+}
