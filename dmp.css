@@ -62,7 +62,7 @@ video {
     z-index: 2;
     position: absolute;
     bottom: 10%;
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content:space-between;
     align-items: center;
@@ -129,4 +129,8 @@ video {
 
 .shaka-scrim-container {
     display: none;
+}
+
+.shaka-play-button{
+    background-color:#ffc7e8;
 }
