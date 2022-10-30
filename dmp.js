@@ -3,7 +3,7 @@ const manifestUri =
 
 
 async function init() {
-    console.log('dmp.js init()');
+    console.log('dmp.js ');
 
     const video = document.getElementById('video');
     const videoContainer = document.getElementById('videoContainer');
@@ -59,8 +59,13 @@ async function init() {
     }
 
 
+    // await player.addChaptersTrack(
+    //     'https://bhaart-videos.s3.ap-south-1.amazonaws.com/sriramachandra/SriRamachandraKripalu_chapters.vtt',
+    //     'en'
+    // );
+
     await player.addChaptersTrack(
-        'https://bhaart-videos.s3.ap-south-1.amazonaws.com/sriramachandra/SriRamachandraKripalu_chapters.vtt',
+        'SriRamachandraKripalu_chapters.vtt',
         'en'
     );
 
@@ -90,7 +95,6 @@ function onUIErrorEvent(errorEvent) {
 function initFailed(errorEvent) {
     // Handle the failure to load; errorEvent.detail.reasonCode has a
     // shaka.ui.FailReasonCode describing why.
-    console.log('FAILED');
     console.error('Unable to load the UI library!');
 }
 
