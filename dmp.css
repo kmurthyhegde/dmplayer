@@ -183,11 +183,11 @@ video {
 }
 
 .shaka-play-button[icon=play] {
-    background-image: url("../ui/images/play_arrow.svg");
+    background-image: url("play_arrow.svg");
 }
 
 .shaka-play-button[icon=pause] {
-    background-image: url("../ui/images/pause.svg");
+    background-image: url("pause.svg");
 }
 
 .dmp-material-icons-round {
