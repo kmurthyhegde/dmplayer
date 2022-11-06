@@ -17,9 +17,9 @@ video {
 } */
 
 /*customize fullscreen control */ 
-.shaka-fullscreen-button {
+/* .shaka-fullscreen-button {
     display: none;
-}
+} */
 
 /*customize mute control */ 
 .shaka-mute-button {
@@ -53,10 +53,11 @@ video {
     cursor: pointer;
 }
 
-.dmp-phrase-navigation-container {
-    background-color: #634e91 ;
+.dmp-time-controls-container {
+    /* background-color: #634e91 ; */
+    background-color: transparent;
     height: 10%;
-    width: 30%;
+    width: 99%;
     opacity: 0;
     transition: opacity cubic-bezier(0.4, 0, 0.6, 1) 600ms;
     z-index: 2;
@@ -65,22 +66,66 @@ video {
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    align-items: center;
+    align-items:flex-end;
 }
 
+
+
+.dmp-phrase-navigation-container {
+    /* background-color: #634e91 ; */
+    background-color: transparent;
+    height: 10%;
+    width: 80%;
+    opacity: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.6, 1) 600ms;
+    z-index: 2;
+    position: absolute;
+    bottom: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+}
+
+
+.dmp-sec-button-controls-container {
+    /* background-color: #634e91 ; */
+    background-color: transparent;
+    height: 10%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.6, 1) 600ms;
+    z-index: 2;
+    position: absolute;
+    top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content:right;
+    align-items: center;
+    padding-right: 5%;
+}
+
+
 .dmp-phrase-navigation-container > * {
-    color: #ffc7e8;
-    height: 100px;
-    line-height: 0.5;
+
+    background-color: #ffc7e8;;
+    color: #634e91;
+    /* height: 100px; */
+    /* line-height: 0.5; */
     margin: 1px;
-    padding: 0 5px;
-    background: transparent;
+    /* padding: 0 5px; */
+    padding: calc(2.5% / 2);
+    /* background: transparent; */
     border: 0;
     cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 50%;
 }
 
 .shaka-controls-container[shown="true"] .dmp-phrase-bar-container,
-.shaka-controls-container[shown="true"] .dmp-phrase-navigation-container
+.shaka-controls-container[shown="true"] .dmp-phrase-navigation-container,
+.shaka-controls-container[shown="true"] .dmp-sec-button-controls-container,  
+.shaka-controls-container[shown="true"] .dmp-time-controls-container  
  {
 
     opacity: 1;
@@ -90,7 +135,7 @@ video {
 .dmp-phrase-bar {
 
     /*background-color:  #E4B3D1;*/
-    background: linear-gradient(to right,  #ffc7e8, white);
+    background: linear-gradient(to right,  #ccc000, #fcff00 95%, white );
     height: 100%;
     /*width: 20px;*/
     border-left: 0px solid #634e91;
@@ -104,8 +149,8 @@ video {
 
 /* animation for the current phrase*/
 @keyframes dmp-current-phrase-bar-animation {
-    0% {background: #634e91;}
-    100% {background: #b688ff;}
+    0% {background: #B31B1B;}
+    100% {background: #ff2626;}
     /*100% {background: #ffc7e8;}*/
   }
 
@@ -132,5 +177,104 @@ video {
 }
 
 .shaka-play-button{
-    background-color:#ffc7e8;
+    /* background-color:#ffc7e8; */
+    /* background-color: #FFDF00; */
+    background-color: #B31B1B;
+}
+
+.shaka-play-button[icon=play] {
+    background-image: url("../ui/images/play_arrow.svg");
+}
+
+.shaka-play-button[icon=pause] {
+    background-image: url("../ui/images/pause.svg");
+}
+
+.dmp-material-icons-round {
+    font-family: "Material Icons Round";
+    font-size:2.5vw;
+  }
+
+
+.shaka-play-button-container {
+    height: 80%;
+}
+
+
+
+.dmp-sec-button-controls-container > * {
+    background-color: #ffc7e8;;
+    color: #634e91;
+    /* height: 100px; */
+    /* line-height: 0.5; */
+    margin: 1px;
+    padding: calc(2.5% / 2);
+    /* background: transparent; */
+    border: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.dmp-settings-button {
+    font-size:1.5vw;
+    background-color: gray;
+    color: white;
+}
+
+.dmp-pitch-button, .dmp-tempo-button {
+    font-size:2.5vw;
+    background-color: #049940;
+    color: #FFDF00;
+
+}
+
+.dmp-loop-phrase-button, .dmp-prev-phrase-button, .dmp-next-phrase-button {
+    font-size:2.5vw;
+    background-color: #B31B1B;
+    color: #FFDF00;
+}
+
+.dmp-subtitle-button{
+    font-size: 2.5vw;
+    background-color: gray;
+    color: white;
+}
+
+.dmp-fullscreen-button {
+    font-size: 2.5vw;
+    background-color: gray;
+    color: white;
+}
+
+/*  Override the buffering spinner. 
+    reduce the height to 90% to 
+    center the spinnner
+*/
+.shaka-spinner-container {
+    height: 80%;
+    width: 100%;
+}
+  
+.dmp-current-time {
+    font-size: 1vw;
+    color: white;
+    cursor: pointer;  
+  }
+  
+
+.dmp-time-controls-container > * {
+
+    background-color: #B31B1B;
+    color: #FFDF00;
+    /* height: 100px; */
+    /* line-height: 0.5; */
+    /* margin: .1vw; */
+    /* padding: 0 5px; */
+    /* padding: calc(2.5% / 2); */
+    /* background: transparent; */
+    border: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 5%;
 }
